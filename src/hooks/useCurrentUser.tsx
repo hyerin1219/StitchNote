@@ -10,9 +10,5 @@ export const useCurrentUser = () => {
         return users?.find((u) => u.uid === uid);
     }, [users, uid]);
 
-    console.log('uid', uid);
-    console.log('users', users);
-    console.log('currentUser', currentUser);
-
     return currentUser;
 };

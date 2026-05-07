@@ -27,7 +27,7 @@ export default function OnlineCrochetCircleDetail() {
             }),
         });
 
-        setInput(''); // 입력창 초기화
+        setInput('');
     };
 
     if (!crochetCircle || !currentUser) return;
@@ -50,6 +50,15 @@ export default function OnlineCrochetCircleDetail() {
                             <span>개설일: {crochetCircle.createdAt}</span>
                             <span>인원: {crochetCircle.memberCount}명</span>
                             <span>방장: {crochetCircle.roomManager.nickName}</span>
+                            <span>
+                                구성원:{' '}
+                                {crochetCircle.member.map((el, index) => (
+                                    <span key={el.uid || index}>
+                                        {el.nickName}
+                                        {index < crochetCircle.member.length - 1 && ', '}
+                                    </span>
+                                ))}
+                            </span>
                         </div>
 
                         {/* 화살표 */}
