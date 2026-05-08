@@ -56,8 +56,7 @@ export default function OnlineCrochetCircle() {
     return (
         <section className="Content">
             <h2 className="Title">온라인 뜨개방</h2>
-            {/* 상단 헤더: 깔끔한 타이틀과 액션 버튼 */}
-            <div className="flex justify-between items-center border-b pb-8">
+            <div className="flex justify-between items-center ">
                 <p className="">참여 중인 유저들과 실시간 뜨개 모임을 즐기세요.</p>
 
                 <Button variant="blue" onClick={handleCreateModal}>
@@ -66,7 +65,7 @@ export default function OnlineCrochetCircle() {
                 </Button>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-10 mt-8">
+            <div className="flex flex-col lg:flex-row gap-10 mt-10">
                 {/* 왼쪽: 방 리스트 영역 */}
                 <div className="flex-1">
                     <div className="flex items-center gap-2 mb-6">

@@ -92,3 +92,14 @@ export type ICrochetCircle = {
     title: string;
     passwords: string;
 };
+
+export interface IChatMessage {
+    id: string;
+    text: string;
+    sender: {
+        uid: string;
+        nickName: string;
+        character: string;
+    };
+    createdAt: any;
+}

@@ -4,7 +4,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { pusherServer } from '@/lib/pusher';
 
 export async function POST(req: Request) {
-    const { text, roomId, senderId, senderName, senderImage } = await req.json();
+    const { text, roomId, sender } = await req.json();
 
     try {
         // 1. 경로 수정: CrochetCircles -> [roomId] -> messages
@@ -12,10 +12,9 @@ export async function POST(req: Request) {
 
         const messageData = {
             text,
-            senderId,
-            // senderName,
-            // senderImage,
-            createdAt: serverTimestamp(), // 서버 시간 기준
+            sender,
+
+            createdAt: serverTimestamp(),
         };
 
         // 2. DB 저장
