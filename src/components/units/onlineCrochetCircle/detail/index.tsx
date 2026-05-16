@@ -81,7 +81,7 @@ export default function OnlineCrochetCircleDetail() {
             </div>
 
             <article className="relative w-full">
-                <img className="absolute left-1/2 top-[-50px] -translate-x-1/2 w-50 " src="/images/img_lamp.png" alt="조명" />
+                <img className="absolute left-1/2 top-[-50px] -translate-x-1/2 w-50 opacity-50" src="/images/img_lamp.png" alt="조명" />
 
                 {/* 채팅 내역 */}
                 <div className="relative w-full h-130 border border-3 border-[var(--color04)] rounded-xl overflow-hidden mt-5 p-3 ">
@@ -109,22 +109,22 @@ export default function OnlineCrochetCircleDetail() {
                             );
                         })}
                     </div>
-                    <img className="absolute left-0 bottom-0 w-full pointer-events-none " src="/images/img_desk3.png" alt="책상" />
+                    <img className="absolute left-0 bottom-0 w-full pointer-events-none opacity-50" src="/images/img_desk3.png" alt="책상" />
                 </div>
 
-                {/* 채팅 입력 영역 영역 ... */}
+                {/* 채팅 입력 영역 영역 */}
                 <div className="mt-5">
                     <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md border border-2 border-[var(--color04)] rounded-full px-4 py-2 shadow-lg">
                         {/* 캐릭터 */}
                         <div className="text-center">
-                            <img src={`/images/char/char_${currentUser.character}.png`} alt="character" className="w-11 h-11 h-full object-contain" />
+                            <img src={`/images/char/char_${currentUser.character}.png`} alt="character" className="w-11 h-11 h-full object-contain " />
                             <p>{currentUser.nickName}</p>
                         </div>
 
                         {/* 입력창 */}
                         <input
                             type="text"
-                            placeholder="메시지를 입력하세요..."
+                            placeholder="메시지를 입력하세요."
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={(e) => {

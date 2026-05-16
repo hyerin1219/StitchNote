@@ -124,15 +124,15 @@ export default function OnlineCrochetCircle() {
 
                 {/* 내 정보 및 참여 현황 */}
                 <div className="w-full lg:w-80 space-y-8">
-                    <div className="bg-gray-50/50 rounded-3xl p-6 border border-gray-100">
-                        <h4 className="text-xs font-black text-gray-400 mb-6 uppercase tracking-widest">My Status</h4>
+                    <div className="">
+                        <h4 className="text-xs font-black text-gray-400 mb-6 uppercase tracking-widest">나의 프로필</h4>
                         {!userLoading && currentUser ? <Character currentUser={currentUser} /> : <div className="h-48 bg-white rounded-2xl border animate-pulse" />}
                     </div>
 
                     {/* 참여 중인 방*/}
                     {joinedCircles.length > 0 && (
                         <div className="space-y-4">
-                            <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest px-1">My Circles</h4>
+                            <h4 className="text-xs font-black text-gray-400 uppercase tracking-widest px-1">나의 뜨개모임</h4>
                             <div className="space-y-2">
                                 {joinedCircles.map((el) => (
                                     <Link href={`/onlineCrochetCircle/${el.id}`} key={el.id} className="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-xl hover:border-[var(--color03)] hover:shadow-sm transition-all group">

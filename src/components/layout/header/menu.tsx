@@ -57,8 +57,6 @@ export default function Menu({ open, onClose }: IProps) {
                         <span className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 rounded bg-black -rotate-45 group-hover:rotate-0 transition-rotate duration-300" />
                     </button>
 
-                    <p className="text-2xl font-bold">메뉴</p>
-
                     <ul className="mt-4 space-y-2 w-full">
                         {menus.map((menu) => (
                             <li key={menu.href}>
