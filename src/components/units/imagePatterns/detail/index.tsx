@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { doc, updateDoc } from 'firebase/firestore';
 
@@ -28,9 +28,14 @@ export default function ImagePatternsDetail() {
         }
     }, [pattern]);
 
+    const Items = useMemo(() => {
+        if (!pattern?.items) return [];
+        return [...pattern.items].reverse();
+    }, [pattern?.items]);
+
     // 단수 체크
     const handleToggleComplete = async (stepId: string) => {
-        if (!pattern?.id) return;
+        if (!uid || !pattern?.id) return;
 
         const isNow = completedIds.includes(stepId);
 
@@ -39,7 +44,7 @@ export default function ImagePatternsDetail() {
         setCompletedIds(updated);
 
         try {
-            const docRef = doc(db, 'ImagePatterns', pattern.id);
+            const docRef = doc(db, 'users', uid, 'ImagePatterns', pattern.id);
 
             await updateDoc(docRef, {
                 completedIds: updated,
@@ -61,10 +66,9 @@ export default function ImagePatternsDetail() {
             </div>
 
             {/* 작업 리스트 */}
-            <div className="mt-6 space-y-3 min-h-135">
-                {[...pattern.items].reverse().map((el, i) => {
+            <div className="mt-6 space-y-3 min-h-128 ">
+                {Items.map((el, i) => {
                     const isDone = completedIds.includes(String(el.id));
-                    // const total = pattern.items.length;
 
                     return (
                         <div

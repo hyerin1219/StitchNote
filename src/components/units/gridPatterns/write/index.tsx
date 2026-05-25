@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 
 import { useAuth } from '@/hooks/useAuth';
 import { useAlert } from '@/hooks/useAlert';
@@ -85,7 +85,7 @@ export default function PatternsWriteGird({ mode, id }: IWriteProps) {
                     title,
                     items: flattenedItems,
                     gridWidth: gridWidth,
-                    createdAt: new Date().toLocaleDateString(),
+                    createdAt: serverTimestamp(),
                 });
 
                 router.push(`/gridPatterns/${docRef.id}`);

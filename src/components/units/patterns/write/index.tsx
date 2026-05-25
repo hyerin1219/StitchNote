@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 
 import WritePattern from './writePattern';
 import WriteForm from '../../../ui/writeForm';
@@ -85,7 +85,7 @@ export default function PatternsWrite({ mode, id }: IWriteProps) {
                     author: uid,
                     ...form,
                     items,
-                    createdAt: new Date().toLocaleDateString(),
+                    createdAt: serverTimestamp(),
                 });
 
                 router.push(`/patterns/${docRef.id}`);

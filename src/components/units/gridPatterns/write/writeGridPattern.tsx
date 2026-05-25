@@ -81,7 +81,7 @@ export default function WriteGridPattern({ setItems }: IProps) {
             });
         },
         [tool, color, symbol]
-    ); // tool, color, symbol이 바뀔 때만 함수 갱신
+    );
 
     // 초기화
     const handleReset = useCallback(() => {

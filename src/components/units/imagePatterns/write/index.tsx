@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 
 import WritePatternImage from './writePatternImage';
 import WriteForm from '../../../ui/writeForm';
@@ -88,7 +88,7 @@ export default function PatternsWriteImage({ mode, id }: IWriteProps) {
                     author: uid,
                     ...form,
                     items,
-                    createdAt: new Date().toLocaleDateString(),
+                    createdAt: serverTimestamp(),
                 });
 
                 router.push(`/imagePatterns/${docRef.id}`);

@@ -66,3 +66,10 @@ textarea {
 .chat-scroll-custom::-webkit-scrollbar-thumb:hover {
     background-color: #666;
 }
+
+img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

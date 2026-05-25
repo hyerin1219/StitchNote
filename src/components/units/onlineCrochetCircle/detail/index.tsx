@@ -1,11 +1,12 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
-
 import { useAuth } from '@/hooks/useAuth';
 import { useCrochetCircleDetail } from '@/hooks/useCrochetCircle';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { useChatMessages } from '@/hooks/useChatMessages';
+import CircleInfo from './circleInfo';
+import { serverTimestamp } from 'firebase/firestore';
 
 export default function OnlineCrochetCircleDetail() {
     const params = useParams();
@@ -38,6 +39,7 @@ export default function OnlineCrochetCircleDetail() {
                     nickName: currentUser.nickName,
                     character: currentUser.character,
                 },
+                createdAt: serverTimestamp(),
             }),
         });
 
@@ -45,40 +47,13 @@ export default function OnlineCrochetCircleDetail() {
     };
 
     if (!crochetCircle || !currentUser) return null;
+    console.log('messages', messages);
 
     return (
         <section className="Content ">
             <h2 className="Title">{crochetCircle.title}</h2>
             {/* 우리방 정보 */}
-            <div className="relative group inline-block">
-                {/* 트리거 */}
-                <button className="px-3 py-1 text-sm bg-[var(--color04)] text-white rounded-full shadow hover:scale-105 transition">우리방 정보</button>
-
-                {/* 툴팁 카드 */}
-                <div className="absolute left-0 top-10  opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200 z-2">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-lg px-4 py-3 min-w-[180px] text-sm text-gray-700 backdrop-blur-md">
-                        <p className="font-semibold  mb-2">📌 우리방 정보</p>
-
-                        <div className="flex flex-col gap-1">
-                            <span>개설일: {crochetCircle.createdAt}</span>
-                            <span>인원: {crochetCircle.memberCount}명</span>
-                            <span>방장: {crochetCircle.roomManager.nickName}</span>
-                            <span>
-                                구성원:{' '}
-                                {crochetCircle.member.map((el, index) => (
-                                    <span key={el.uid || index}>
-                                        {el.nickName}
-                                        {index < crochetCircle.member.length - 1 && ', '}
-                                    </span>
-                                ))}
-                            </span>
-                        </div>
-
-                        {/* 화살표 */}
-                        <div className="absolute -top-[7px] left-4  w-3 h-3 bg-white border-l border-t border-gray-200 rotate-45" />
-                    </div>
-                </div>
-            </div>
+            <CircleInfo crochetCircle={crochetCircle} />
 
             <article className="relative w-full">
                 <img className="absolute left-1/2 top-[-50px] -translate-x-1/2 w-50 opacity-50" src="/images/img_lamp.png" alt="조명" />
@@ -100,7 +75,7 @@ export default function OnlineCrochetCircleDetail() {
 
                                     <div className={`flex items-end gap-2 max-w-[85%] ${isMe ? 'flex-row-reverse' : 'flex-row'}`}>
                                         {/* 말풍선 */}
-                                        <div className={`px-4 py-2 rounded-2xl text-sm shadow-sm ${isMe ? 'bg-[#B9D7EA] text-gray-800 rounded-br-none' : 'bg-[#B3D4A5] text-gray-800 rounded-bl-none'}`}>{el.text}</div>
+                                        <div className={`px-4 py-2 rounded-2xl text-sm shadow-sm ${isMe ? 'bg-[var(--color03)] text-gray-800 rounded-br-none' : 'bg-[#B3D4A5] text-gray-800 rounded-bl-none'}`}>{el.text}</div>
 
                                         {/* 시간 표시 */}
                                         <span className="text-[10px] text-gray-400 whitespace-nowrap mb-1">{el.createdAt?.toDate ? el.createdAt.toDate().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '...'}</span>
