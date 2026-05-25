@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import Alert from '@/components/ui/alert';
 
 import WriteGridPattern from './writeGridPattern';
+import { useGirdPatternDetail } from '@/hooks/useGridPattern';
 
 interface IWriteProps {
     mode: 'submit' | 'edit';

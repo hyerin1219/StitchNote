@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { IGirdPattern } from '@/types';
+import { IGirdPattern, IGridPattern2D } from '@/types';
 import { useGridPatternStore } from '@/store/useGridPatternStore';
 import { useAuth } from './useAuth';
 
 export function useGridPattern() {
     const { patterns, loading, fetchPatterns } = useGridPatternStore();
     const { uid } = useAuth();
+
     useEffect(() => {
         if (uid) {
             fetchPatterns(uid);
@@ -17,14 +18,22 @@ export function useGridPattern() {
 
 export function useGirdPatternDetail(id: string) {
     const { getPatternById, loading } = useGridPatternStore();
-    const [pattern, setPattern] = useState<IGirdPattern | null>(null);
+    const [pattern, setPattern] = useState<IGridPattern2D | null>(null);
     const { uid } = useAuth();
 
     useEffect(() => {
-        // uid와 id가 모두 있을 때만 실행
         if (uid && id) {
             getPatternById(uid, id).then((res) => {
-                setPattern(res);
+                if (res) {
+                    const items2D = res.items && res.gridWidth ? Array.from({ length: Math.ceil(res.items.length / res.gridWidth) }, (_, i) => res.items.slice(i * res.gridWidth, (i + 1) * res.gridWidth)) : [];
+
+                    setPattern({
+                        ...res,
+                        items: items2D,
+                    });
+                } else {
+                    setPattern(null);
+                }
             });
         }
     }, [uid, id, getPatternById]);

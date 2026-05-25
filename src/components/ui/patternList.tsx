@@ -20,7 +20,7 @@ export default function PatternCard({ data, type }: IProps) {
                     <span className="text-base font-semibold text-gray-900 transition group-hover:text-[var(--color04)]">{el.title}</span>
 
                     {/* 오른쪽 */}
-                    <span className="flex flex-col shrink-0 text-xs text-gray-400">{new Date(el.createdAt).toLocaleDateString()}</span>
+                    <span className="flex flex-col shrink-0 text-xs text-gray-400">{el.createdAt?.toDate ? el.createdAt.toDate().toLocaleDateString() : ''}</span>
                 </Link>
             ))}
         </div>

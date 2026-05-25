@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 // 코바늘 도안 form 타입
 export type IFormState = {
     title: string;
@@ -21,7 +23,7 @@ export type IPattern = {
     title: string;
     content: string;
     category: string;
-    createdAt: string;
+    createdAt: Timestamp;
     items: IPatternItem[];
 
     completedIds: string[];
@@ -41,7 +43,7 @@ export type IImagePattern = {
     title: string;
     content: string;
     category: string;
-    createdAt: string;
+    createdAt: Timestamp;
     items: IPatternImageItem[];
 
     completedIds: string[];
@@ -59,7 +61,7 @@ export type IGirdPattern = {
     id: string;
     author: string;
     title: string;
-    createdAt: string;
+    createdAt: Timestamp;
     gridWidth: number;
     items: IPatternGridItem[];
     // items: IPatternGridItem[][];
@@ -67,11 +69,15 @@ export type IGirdPattern = {
     completedIds: string[];
 };
 
+export interface IGridPattern2D extends Omit<IGirdPattern, 'items'> {
+    items: IPatternGridItem[][];
+}
+
 // ******************************* user type
 export interface IUserInfo {
     id: string; // 문서 ID
     character: string;
-    createdAt: string;
+    createdAt: Timestamp;
     nickName: string;
     uid: string;
 }
@@ -84,7 +90,7 @@ export type ICrochetCircleItem = {
 
 export type ICrochetCircle = {
     roomManager: IUserInfo;
-    createdAt: string;
+    createdAt: Timestamp;
     id: string;
     room: ICrochetCircleItem[];
     member: IUserInfo[];
@@ -101,5 +107,5 @@ export interface IChatMessage {
         nickName: string;
         character: string;
     };
-    createdAt: any;
+    createdAt: Timestamp;
 }

@@ -1,4 +1,3 @@
-import { CrochetSymbol } from '@/lib';
 import { useAlert } from '@/hooks/useAlert';
 import { Button } from '@/components/ui/button';
 import Alert from '@/components/ui/alert';
@@ -71,8 +70,8 @@ export default function WritePatternImage({ items, setItems }: IProps) {
                 </div>
 
                 {/* 단수 */}
-                <div className="flex-1 space-y-4 bg-gray-50 p-3 rounded-lg border border-gray-100">
-                    <div className="flex flex-col gap-2">
+                <div className="flex-1 space-y-4 bg-gray-50 p-3 rounded-lg border border-gray-100 ">
+                    <div className="flex flex-col gap-2 overflow-y-auto h-105">
                         {items.map((row, rowIdx) => (
                             <div key={rowIdx} className="flex items-center gap-2">
                                 {/* 단수 */}
@@ -96,11 +95,11 @@ export default function WritePatternImage({ items, setItems }: IProps) {
                                 </div>
                             </div>
                         ))}
-                        {/* 단 추가 버튼 */}
-                        <Button type="button" size="sm" onClick={handleAddRow}>
-                            단 추가
-                        </Button>
                     </div>
+                    {/* 단 추가 버튼 */}
+                    <Button type="button" size="sm" onClick={handleAddRow}>
+                        단 추가
+                    </Button>
                 </div>
             </div>
 
