@@ -54,6 +54,21 @@ export default function ImagePatternsDetail() {
         }
     };
 
+    // 리셋버튼
+    const handleRest = async () => {
+        if (!uid || !pattern?.id) return;
+        setCompletedIds([]);
+        try {
+            const docRef = doc(db, 'users', uid, 'ImagePatterns', pattern.id);
+
+            await updateDoc(docRef, {
+                completedIds: '',
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     if (!pattern) return null;
 
     return (
@@ -98,6 +113,8 @@ export default function ImagePatternsDetail() {
                         </div>
                     );
                 })}
+
+                <Button onClick={handleRest}>단수체크 리셋</Button>
             </div>
 
             {/* 버튼 */}

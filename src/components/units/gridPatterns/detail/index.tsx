@@ -43,6 +43,21 @@ export default function GridPatternsDetail() {
         }
     };
 
+    // 리셋버튼
+    const handleRest = async () => {
+        if (!uid || !pattern?.id) return;
+        setCompletedIds([]);
+        try {
+            const docRef = doc(db, 'users', uid, 'GridPatterns', pattern.id);
+
+            await updateDoc(docRef, {
+                completedIds: '',
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     if (loading) return <div className="p-5 text-center text-gray-500">도안을 로드 중입니다...</div>;
     if (!pattern) return <div className="p-5 text-center text-gray-500">도안을 찾을 수 없습니다.</div>;
 
@@ -81,6 +96,7 @@ export default function GridPatternsDetail() {
                         })}
                     </div>
                 </div>
+                <Button onClick={handleRest}>단수체크 리셋</Button>
             </div>
 
             {/* 하단 제어 버튼 */}

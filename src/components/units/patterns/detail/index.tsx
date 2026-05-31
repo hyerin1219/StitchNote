@@ -61,6 +61,21 @@ export default function PatternsDetail() {
         }
     };
 
+    // 리셋버튼
+    const handleRest = async () => {
+        if (!uid || !pattern?.id) return;
+        setCompletedIds([]);
+        try {
+            const docRef = doc(db, 'users', uid, 'Patterns', pattern.id);
+
+            await updateDoc(docRef, {
+                completedIds: '',
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <section className="Content">
             {/* 상단 카드 */}
@@ -89,6 +104,8 @@ export default function PatternsDetail() {
                         </div>
                     );
                 })}
+
+                <Button onClick={handleRest}>단수체크 리셋</Button>
             </div>
 
             <div className="flex items-center justify-end gap-3 mt-5">
